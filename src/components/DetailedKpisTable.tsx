@@ -54,43 +54,56 @@ export const DetailedKpisTable: React.FC = () => {
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
-            {mockData.map((categoryData, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
-                <AccordionTrigger className="hover:no-underline py-3 px-4 text-base font-medium text-left">
-                  {categoryData.category}
-                </AccordionTrigger>
-                <AccordionContent className="p-0">
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow className="border-gray-100">
-                          <TableHead>Modelo</TableHead>
-                          <TableHead>PNC</TableHead>
-                          <TableHead>Voltagem</TableHead>
-                          <TableHead className="text-right">Faturado</TableHead>
-                          <TableHead className="text-right">Cota</TableHead>
-                          <TableHead className="text-right">Falta/Extra Cota</TableHead>
-                          <TableHead className="text-right">Atingimento</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {categoryData.details.map((item, detailIndex) => (
-                          <TableRow key={detailIndex} className="border-gray-100">
-                            <TableCell className="font-medium">{item.modelo}</TableCell>
-                            <TableCell>{item.pnc}</TableCell>
-                            <TableCell>{item.voltage}</TableCell>
-                            <TableCell className="text-right">{item.faturado}</TableCell>
-                            <TableCell className="text-right">{item.cota}</TableCell>
-                            <TableCell className="text-right">{item.faltaExtraCota}</TableCell>
-                            <TableCell className="text-right">{item.atingimento}</TableCell>
+            {mockData.map((categoryData, index) => {
+              const totalFaturado = categoryData.details.reduce((sum, item) => sum + item.faturado, 0);
+              const totalCota = categoryData.details.reduce((sum, item) => sum + item.cota, 0);
+              const totalFaltaExtraCota = categoryData.details.reduce((sum, item) => sum + item.faltaExtraCota, 0);
+              const overallAtingimento = totalCota > 0 ? ((totalFaturado / totalCota) * 100).toFixed(0) + "%" : "0%";
+
+              return (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
+                  <AccordionTrigger className="hover:no-underline py-3 px-4 text-base font-medium text-left flex justify-between items-center">
+                    <span className="flex-1">{categoryData.category}</span>
+                    <div className="flex-1 grid grid-cols-4 text-right gap-4 min-w-[400px]">
+                      <span className="font-normal text-sm text-muted-foreground">Faturado: {totalFaturado}</span>
+                      <span className="font-normal text-sm text-muted-foreground">Cota: {totalCota}</span>
+                      <span className="font-normal text-sm text-muted-foreground">Falta/Extra: {totalFaltaExtraCota}</span>
+                      <span className="font-normal text-sm text-muted-foreground">Atingimento: {overallAtingimento}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="p-0">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="border-gray-100">
+                            <TableHead>Modelo</TableHead>
+                            <TableHead>PNC</TableHead>
+                            <TableHead>Voltagem</TableHead>
+                            <TableHead className="text-right">Faturado</TableHead>
+                            <TableHead className="text-right">Cota</TableHead>
+                            <TableHead className="text-right">Falta/Extra Cota</TableHead>
+                            <TableHead className="text-right">Atingimento</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+                        </TableHeader>
+                        <TableBody>
+                          {categoryData.details.map((item, detailIndex) => (
+                            <TableRow key={detailIndex} className="border-gray-100">
+                              <TableCell className="font-medium">{item.modelo}</TableCell>
+                              <TableCell>{item.pnc}</TableCell>
+                              <TableCell>{item.voltage}</TableCell>
+                              <TableCell className="text-right">{item.faturado}</TableCell>
+                              <TableCell className="text-right">{item.cota}</TableCell>
+                              <TableCell className="text-right">{item.faltaExtraCota}</TableCell>
+                              <TableCell className="text-right">{item.atingimento}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
           </Accordion>
         </CardContent>
       </Card>
