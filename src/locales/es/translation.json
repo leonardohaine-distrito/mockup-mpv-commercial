@@ -1,0 +1,134 @@
+{
+  "toolbar": {
+    "dashboardTitle": "Panel de Control Dyad",
+    "loginButton": "Iniciar Sesión"
+  },
+  "languageSwitcher": {
+    "selectLanguage": "Seleccionar Idioma"
+  },
+  "filters": {
+    "regionalLabel": "Regional:",
+    "selectRegionalPlaceholder": "Seleccionar Regional",
+    "north": "Norte",
+    "south": "Sur",
+    "east": "Este",
+    "west": "Oeste",
+    "clientLabel": "Cliente:",
+    "selectClientPlaceholder": "Seleccionar Cliente",
+    "categoryLabel": "Categoría:",
+    "selectCategoryPlaceholder": "Seleccionar Categoría"
+  },
+  "executiveSummary": {
+    "title": "Resumen Ejecutivo",
+    "fatQuota": "% Facturado x Cuota",
+    "fatAllocatedQuota": "% Facturado + Asignado x Cuota",
+    "projectedResolvedQuota": "% Proy. Resuelto x Cuota",
+    "totalSalesAdherentQuota": "% Venta Total Adherente x Cuota",
+    "totalMonthSalesQuotaM0": "% Venta Total Mes x Cuota M0",
+    "fatQuotaDescription": "Logro de cuota en relación con lo facturado.",
+    "fatAllocatedQuotaDescription": "Logro de cuota en relación con lo facturado + asignado.",
+    "projectedResolvedQuotaDescription": "Proyección del logro de cuota en relación con lo facturado + asignado.",
+    "totalSalesAdherentQuotaDescription": "Porcentaje de ventas totales adherentes a la cuota.",
+    "totalMonthSalesQuotaM0Description": "Diferencia de las ventas totales del mes en relación con la cuota M0.",
+    "blockagesAndPendingTotals": "Totales de Bloqueos y Pendientes",
+    "awaitingScheduleReturn": "Pendiente de Retorno de Agenda",
+    "fobPending": "FOB Pendiente",
+    "creditBlockage": "Bloqueo de Crédito",
+    "orderBlockage": "Bloqueo de Órdenes",
+    "awaitingScheduleReturnDescription": "Cantidad total de ítems con estado 'Pendiente de Retorno de Agenda'.",
+    "fobPendingDescription": "Cantidad total de ítems con estado 'FOB Pendiente'.",
+    "creditBlockageDescription": "Cantidad total de ítems con estado 'Bloqueo de Crédito'.",
+    "orderBlockageDescription": "Cantidad total de ítems con estado 'Bloqueo de Órdenes'.",
+    "sellInOutTotals": "Totales Sell-In y Sell-Out",
+    "sellInOutTotalsDescription": "Volúmenes agregados de Sell-In y Sell-Out en diferentes períodos.",
+    "totalSellInCurrentMonth": "Total Sell-In (Mes Actual)",
+    "totalSellInPreviousMonth": "Total Sell-In (Mes Anterior)",
+    "totalSellInLastYearMonth": "Total Sell-In (Mes Año Pasado)",
+    "totalSellInCurrentYearYTD": "Total Sell-In (Año Actual YTD)",
+    "totalSellOutCurrentMonth": "Total Sell-Out (Mes Actual)",
+    "totalSellOutPreviousMonth": "Total Sell-Out (Mes Anterior)",
+    "totalSellOutLastYearMonth": "Total Sell-Out (Mes Año Pasado)",
+    "totalSellOutCurrentYearYTD": "Total Sell-Out (Año Actual YTD)"
+  },
+  "detailedKpisTable": {
+    "title": "Detalle de KPIs",
+    "volumeByCategory": "Volumen por Categoría",
+    "quota": "Cuota:",
+    "billed": "Facturado:",
+    "allocated": "Asignado:",
+    "salesShortfall": "Falta de Venta:",
+    "model": "Modelo",
+    "pnc": "PNC",
+    "voltage": "Voltaje",
+    "quantity": "Cantidad",
+    "chatSuggestionText": "Generar una tabla con los 5 productos principales de la categoría \"Refrigeradores\" que muestran la mayor diferencia entre la cuota y lo facturado. Utilice los datos completos disponibles de la fuente y resalte los productos con la mayor brecha entre lo planificado y lo vendido. Incluya modelo, PNC, voltaje, cuota, facturado, asignado y falta de venta.",
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
+  },
+  "agendaFobStatus": {
+    "title": "Pendiente de Retorno de Agenda",
+    "pendingItemsByCategory": "Ítems Pendientes por Categoría",
+    "totalItems": "Total: {{count}} ítems",
+    "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems pendientes en \"Pendiente de Retorno de Agenda\", agrupados por categoría (Refrigeradores, Lavadoras, Estufas, Microondas). Incluya modelo, PNC, cantidad pendiente y categoría.",
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
+  },
+  "fobStatusTable": {
+    "title": "FOB Pendiente",
+    "pendingFobItemsByCategory": "Ítems FOB Pendientes por Categoría",
+    "totalItems": "Total: {{count}} ítems",
+    "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems FOB pendientes, considerando todas las categorías. Utilice los datos completos disponibles de la fuente e incluya modelo, PNC, categoría, cantidad pendiente y voltaje.",
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
+  },
+  "creditBlockTable": {
+    "title": "Bloqueo de Crédito",
+    "blockedItemsByCategory": "Ítems Bloqueados por Crédito por Categoría",
+    "totalItems": "Total: {{count}} ítems",
+    "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems bloqueados por crédito. Utilice los datos completos disponibles de la fuente y presente los resultados en orden descendente de bloqueo. Incluya modelo, PNC, cantidad pendiente y categoría.",
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
+  },
+  "orderBlockTable": {
+    "title": "Bloqueo de Órdenes",
+    "blockedItemsByCategory": "Ítems Bloqueados por Órdenes por Categoría",
+    "totalItems": "Total: {{count}} ítems",
+    "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems bloqueados por orden. Utilice los datos completos disponibles de la fuente y presente los resultados en orden descendente de bloqueo. Incluya modelo, PNC, cantidad pendiente y categoría.",
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
+  },
+  "sellInOut": {
+    "title": "Sell-In y Sell-Out",
+    "sellInComparative": "Sell-In (Comparativo por Categoría)",
+    "category": "Categoría",
+    "currentMonth": "Mes Actual",
+    "previousMonth": "Mes Anterior",
+    "lastYearMonth": "Mes Año Pasado",
+    "currentYearYTD": "Año Actual (YTD)",
+    "lastYearYTD": "Año Pasado (YTD)",
+    "sellOutReported": "Sell-Out (Reportado por Cliente)",
+    "reportedVolume": "Volumen Reportado",
+    "quotaAchievement": "% Logro de Cuota"
+  },
+  "recommendations": {
+    "title": "Conclusiones y Acciones Recomendadas",
+    "aiRecommendations": "Recomendaciones de IA",
+    "recommendationText": "El logro de cuota para 'Refrigeradores' está por debajo del 70% después del día 15 del mes. Recomendamos enfocarse en liberar bloqueos de crédito para el Cliente C y negociar agendas pendientes para productos de alto valor.",
+    "action1": "Buscar productos faltantes para 'Refrigerador Y'.",
+    "action2": "Liberar bloqueos de crédito para el Cliente C.",
+    "action3": "Negociar agenda para 50 ítems pendientes."
+  },
+  "chatAssistant": {
+    "title": "Asistente del Panel de Control",
+    "initialMessage": "¡Hola! ¿Cómo puedo ayudarte con tu panel de control hoy?",
+    "inputPlaceholder": "Haz una pregunta o da un comando...",
+    "aiResponsePrefix": "Entendí que dijiste: \"{{message}}\". ¿Cómo puedo ajustar el panel de control basándome en eso?"
+  },
+  "activateChatButton": {
+    "activateAssistant": "Iniciar Asistente"
+  },
+  "chatWidget": {
+    "openChat": "Abrir Chat"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "¡Ups! Página no encontrada",
+    "returnHome": "Volver a la Página de Inicio"
+  },
+  "madeWithDyad": "Hecho con Dyad"
+}

@@ -1,0 +1,134 @@
+{
+  "toolbar": {
+    "dashboardTitle": "Dyad Dashboard",
+    "loginButton": "Login"
+  },
+  "languageSwitcher": {
+    "selectLanguage": "Select Language"
+  },
+  "filters": {
+    "regionalLabel": "Regional:",
+    "selectRegionalPlaceholder": "Select Regional",
+    "north": "North",
+    "south": "South",
+    "east": "East",
+    "west": "West",
+    "clientLabel": "Client:",
+    "selectClientPlaceholder": "Select Client",
+    "categoryLabel": "Category:",
+    "selectCategoryPlaceholder": "Select Category"
+  },
+  "executiveSummary": {
+    "title": "Executive Summary",
+    "fatQuota": "% Billed x Quota",
+    "fatAllocatedQuota": "% Billed + Allocated x Quota",
+    "projectedResolvedQuota": "% Projected Resolved x Quota",
+    "totalSalesAdherentQuota": "% Total Adherent Sales x Quota",
+    "totalMonthSalesQuotaM0": "% Total Month Sales x Quota M0",
+    "fatQuotaDescription": "Quota achievement relative to billed.",
+    "fatAllocatedQuotaDescription": "Quota achievement relative to billed + allocated.",
+    "projectedResolvedQuotaDescription": "Projection of quota achievement relative to billed + allocated.",
+    "totalSalesAdherentQuotaDescription": "Percentage of total sales adherent to quota.",
+    "totalMonthSalesQuotaM0Description": "Difference of total month sales relative to quota M0.",
+    "blockagesAndPendingTotals": "Blockages and Pending Totals",
+    "awaitingScheduleReturn": "Awaiting Schedule Return",
+    "fobPending": "FOB Pending",
+    "creditBlockage": "Credit Blockage",
+    "orderBlockage": "Order Blockage",
+    "awaitingScheduleReturnDescription": "Total quantity of items with 'Awaiting Schedule Return' status.",
+    "fobPendingDescription": "Total quantity of items with 'FOB Pending' status.",
+    "creditBlockageDescription": "Total quantity of items with 'Credit Blockage' status.",
+    "orderBlockageDescription": "Total quantity of items with 'Order Blockage' status.",
+    "sellInOutTotals": "Sell-In & Sell-Out Totals",
+    "sellInOutTotalsDescription": "Aggregated Sell-In and Sell-Out volumes across different periods.",
+    "totalSellInCurrentMonth": "Total Sell-In (Current Month)",
+    "totalSellInPreviousMonth": "Total Sell-In (Previous Month)",
+    "totalSellInLastYearMonth": "Total Sell-In (Last Year Month)",
+    "totalSellInCurrentYearYTD": "Total Sell-In (Current Year YTD)",
+    "totalSellOutCurrentMonth": "Total Sell-Out (Current Month)",
+    "totalSellOutPreviousMonth": "Total Sell-Out (Previous Month)",
+    "totalSellOutLastYearMonth": "Total Sell-Out (Last Year Month)",
+    "totalSellOutCurrentYearYTD": "Total Sell-Out (Current Year YTD)"
+  },
+  "detailedKpisTable": {
+    "title": "KPI Details",
+    "volumeByCategory": "Volume by Category",
+    "quota": "Quota:",
+    "billed": "Billed:",
+    "allocated": "Allocated:",
+    "salesShortfall": "Sales Shortfall:",
+    "model": "Model",
+    "pnc": "PNC",
+    "voltage": "Voltage",
+    "quantity": "Quantity",
+    "chatSuggestionText": "Generate a table with the Top 5 products in the \"Refrigerators\" category that show the largest difference between quota and billed. Use the complete data available from the source and highlight products with the largest gap between what was planned and what was sold. Include model, PNC, voltage, quota, billed, allocated, and sales shortfall.",
+    "chatSuggestionTooltip": "Click to start an interactive analysis via Chat based on the available data."
+  },
+  "agendaFobStatus": {
+    "title": "Awaiting Schedule Return",
+    "pendingItemsByCategory": "Pending Items by Category",
+    "totalItems": "Total: {{count}} items",
+    "chatSuggestionText": "Generate a table with the Top 5 products with the highest number of pending items in \"Awaiting Schedule Return\", grouped by category (Refrigerators, Washers, Stoves, Microwaves). Include model, PNC, pending quantity, and category.",
+    "chatSuggestionTooltip": "Click to start an interactive analysis via Chat based on the available data."
+  },
+  "fobStatusTable": {
+    "title": "FOB Pending",
+    "pendingFobItemsByCategory": "Pending FOB Items by Category",
+    "totalItems": "Total: {{count}} items",
+    "chatSuggestionText": "Generate a table with the Top 5 products with the highest number of pending FOB items, considering all categories. Use the complete data available from the source and include model, PNC, category, pending quantity, and voltage.",
+    "chatSuggestionTooltip": "Click to start an interactive analysis via Chat based on the available data."
+  },
+  "creditBlockTable": {
+    "title": "Credit Blockage",
+    "blockedItemsByCategory": "Credit Blocked Items by Category",
+    "totalItems": "Total: {{count}} items",
+    "chatSuggestionText": "Generate a table with the Top 5 products with the highest number of credit-blocked items. Use the complete data available from the source and present the results in descending order of blockage. Include model, PNC, pending quantity, and category.",
+    "chatSuggestionTooltip": "Click to start an interactive analysis via Chat based on the available data."
+  },
+  "orderBlockTable": {
+    "title": "Order Blockage",
+    "blockedItemsByCategory": "Order Blocked Items by Category",
+    "totalItems": "Total: {{count}} items",
+    "chatSuggestionText": "Generate a table with the Top 5 products with the highest number of order-blocked items. Use the complete data available from the source and present the results in descending order of blockage. Include model, PNC, pending quantity, and category.",
+    "chatSuggestionTooltip": "Click to start an interactive analysis via Chat based on the available data."
+  },
+  "sellInOut": {
+    "title": "Sell-In and Sell-Out",
+    "sellInComparative": "Sell-In (Category Comparative)",
+    "category": "Category",
+    "currentMonth": "Current Month",
+    "previousMonth": "Previous Month",
+    "lastYearMonth": "Last Year Month",
+    "currentYearYTD": "Current Year (YTD)",
+    "lastYearYTD": "Last Year (YTD)",
+    "sellOutReported": "Sell-Out (Reported by Client)",
+    "reportedVolume": "Reported Volume",
+    "quotaAchievement": "% Quota Achievement"
+  },
+  "recommendations": {
+    "title": "Conclusions and Recommended Actions",
+    "aiRecommendations": "AI Recommendations",
+    "recommendationText": "Quota achievement for 'Refrigerators' is below 70% after the 15th of the month. We recommend focusing on releasing credit blocks for Client C and negotiating pending schedules for high-value products.",
+    "action1": "Search for missing products for 'Refrigerator Y'.",
+    "action2": "Release credit blocks for Client C.",
+    "action3": "Negotiate schedule for 50 pending items."
+  },
+  "chatAssistant": {
+    "title": "Dashboard Assistant",
+    "initialMessage": "Hello! How can I help with your dashboard today?",
+    "inputPlaceholder": "Ask a question or give a command...",
+    "aiResponsePrefix": "I understood you said: \"{{message}}\". How can I adjust the dashboard based on that?"
+  },
+  "activateChatButton": {
+    "activateAssistant": "Start Assistant"
+  },
+  "chatWidget": {
+    "openChat": "Open Chat"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Page not found",
+    "returnHome": "Return to Home"
+  },
+  "madeWithDyad": "Made with Dyad"
+}

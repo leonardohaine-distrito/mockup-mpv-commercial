@@ -4,33 +4,32 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CalendarCheck, MessageSquare } from "lucide-react";
-import { rawAgendaData } from "@/data/dashboardData";
+import { Lock, MessageSquare } from "lucide-react";
+import { rawCreditBlockData } from "@/data/dashboardData";
 import { useTranslation } from "react-i18next"; // Import useTranslation
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-interface AgendaItem {
+interface BlockItem {
   modelo: string;
   pnc: string;
   voltage: string;
   quantidade: number;
 }
 
-interface AgendaCategory {
+interface BlockCategory {
   category: string;
   totalQuantidade: number;
-  details: AgendaItem[];
+  details: BlockItem[];
 }
 
-// Grouping and ordering logic
-const groupedData: { [key: string]: AgendaItem[] } = {};
-rawAgendaData.forEach(item => {
+const groupedCreditBlockData: { [key: string]: BlockItem[] } = {};
+rawCreditBlockData.filter(item => item.indicador === "Bloq. Crédito").forEach(item => {
   const categoryKey = item.category.toUpperCase();
-  if (!groupedData[categoryKey]) {
-    groupedData[categoryKey] = [];
+  if (!groupedCreditBlockData[categoryKey]) {
+    groupedCreditBlockData[categoryKey] = [];
   }
-  groupedData[categoryKey].push({
+  groupedCreditBlockData[categoryKey].push({
     modelo: item.modelo,
     pnc: item.pnc,
     voltage: item.voltage,
@@ -39,8 +38,8 @@ rawAgendaData.forEach(item => {
 });
 
 const orderedCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
-const processedAgendaData: AgendaCategory[] = orderedCategories.map(category => {
-  const details = groupedData[category] || [];
+const processedCreditBlockData: BlockCategory[] = orderedCategories.map(category => {
+  const details = groupedCreditBlockData[category] || [];
   const totalQuantidade = details.reduce((sum, item) => sum + item.quantidade, 0);
   return {
     category: category,
@@ -49,20 +48,20 @@ const processedAgendaData: AgendaCategory[] = orderedCategories.map(category => 
   };
 }).filter(category => category.details.length > 0);
 
-interface AgendaFobStatusProps {
+interface CreditBlockTableProps {
   onSuggestChatInput: (text: string) => void;
 }
 
-export const AgendaFobStatus: React.FC<AgendaFobStatusProps> = ({ onSuggestChatInput }) => {
+export const CreditBlockTable: React.FC<CreditBlockTableProps> = ({ onSuggestChatInput }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
-  const chatSuggestionText = t("agendaFobStatus.chatSuggestionText");
-  const chatSuggestionTooltip = t("agendaFobStatus.chatSuggestionTooltip");
+  const chatSuggestionText = t("creditBlockTable.chatSuggestionText");
+  const chatSuggestionTooltip = t("creditBlockTable.chatSuggestionTooltip");
 
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-        <h2 className="text-2xl font-semibold">{t("agendaFobStatus.title")}</h2> {/* Translated text */}
+        <h2 className="text-2xl font-semibold">{t("creditBlockTable.title")}</h2> {/* Translated text */}
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -82,18 +81,18 @@ export const AgendaFobStatus: React.FC<AgendaFobStatusProps> = ({ onSuggestChatI
       <Card className="rounded-none border border-gray-200 shadow-none">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <CalendarCheck className="h-5 w-5 text-muted-foreground" />
-            {t("agendaFobStatus.pendingItemsByCategory")} {/* Translated text */}
+            <Lock className="h-5 w-5 text-muted-foreground" />
+            {t("creditBlockTable.blockedItemsByCategory")} {/* Translated text */}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <Accordion type="single" collapsible className="w-full">
-            {processedAgendaData.map((categoryData, index) => (
+            {processedCreditBlockData.map((categoryData, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3 px-4 text-base font-medium text-left flex justify-between items-center">
                   <span className="flex-1">{categoryData.category}</span>
                   <span className="font-normal text-sm text-muted-foreground text-right">
-                    {t("agendaFobStatus.totalItems", { count: categoryData.totalQuantidade })} {/* Translated text with interpolation */}
+                    {t("creditBlockTable.totalItems", { count: categoryData.totalQuantidade })} {/* Translated text with interpolation */}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="p-0">

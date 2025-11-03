@@ -4,33 +4,33 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { CalendarCheck, MessageSquare } from "lucide-react";
-import { rawAgendaData } from "@/data/dashboardData";
+import { Package, MessageSquare } from "lucide-react";
+import { rawFobData } from "@/data/dashboardData";
 import { useTranslation } from "react-i18next"; // Import useTranslation
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-interface AgendaItem {
+interface FobItem {
   modelo: string;
   pnc: string;
   voltage: string;
   quantidade: number;
 }
 
-interface AgendaCategory {
+interface FobCategory {
   category: string;
   totalQuantidade: number;
-  details: AgendaItem[];
+  details: FobItem[];
 }
 
-// Grouping and ordering logic
-const groupedData: { [key: string]: AgendaItem[] } = {};
-rawAgendaData.forEach(item => {
+// Grouping and ordering logic for FOB data
+const groupedFobData: { [key: string]: FobItem[] } = {};
+rawFobData.filter(item => item.indicador === "FOB Pendente").forEach(item => {
   const categoryKey = item.category.toUpperCase();
-  if (!groupedData[categoryKey]) {
-    groupedData[categoryKey] = [];
+  if (!groupedFobData[categoryKey]) {
+    groupedFobData[categoryKey] = [];
   }
-  groupedData[categoryKey].push({
+  groupedFobData[categoryKey].push({
     modelo: item.modelo,
     pnc: item.pnc,
     voltage: item.voltage,
@@ -38,9 +38,9 @@ rawAgendaData.forEach(item => {
   });
 });
 
-const orderedCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
-const processedAgendaData: AgendaCategory[] = orderedCategories.map(category => {
-  const details = groupedData[category] || [];
+const orderedFobCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
+const processedFobData: FobCategory[] = orderedFobCategories.map(category => {
+  const details = groupedFobData[category] || [];
   const totalQuantidade = details.reduce((sum, item) => sum + item.quantidade, 0);
   return {
     category: category,
@@ -49,20 +49,20 @@ const processedAgendaData: AgendaCategory[] = orderedCategories.map(category => 
   };
 }).filter(category => category.details.length > 0);
 
-interface AgendaFobStatusProps {
+interface FobStatusTableProps {
   onSuggestChatInput: (text: string) => void;
 }
 
-export const AgendaFobStatus: React.FC<AgendaFobStatusProps> = ({ onSuggestChatInput }) => {
+export const FobStatusTable: React.FC<FobStatusTableProps> = ({ onSuggestChatInput }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
-  const chatSuggestionText = t("agendaFobStatus.chatSuggestionText");
-  const chatSuggestionTooltip = t("agendaFobStatus.chatSuggestionTooltip");
+  const chatSuggestionText = t("fobStatusTable.chatSuggestionText");
+  const chatSuggestionTooltip = t("fobStatusTable.chatSuggestionTooltip");
 
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-        <h2 className="text-2xl font-semibold">{t("agendaFobStatus.title")}</h2> {/* Translated text */}
+        <h2 className="text-2xl font-semibold">{t("fobStatusTable.title")}</h2> {/* Translated text */}
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -82,18 +82,18 @@ export const AgendaFobStatus: React.FC<AgendaFobStatusProps> = ({ onSuggestChatI
       <Card className="rounded-none border border-gray-200 shadow-none">
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <CalendarCheck className="h-5 w-5 text-muted-foreground" />
-            {t("agendaFobStatus.pendingItemsByCategory")} {/* Translated text */}
+            <Package className="h-5 w-5 text-muted-foreground" />
+            {t("fobStatusTable.pendingFobItemsByCategory")} {/* Translated text */}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <Accordion type="single" collapsible className="w-full">
-            {processedAgendaData.map((categoryData, index) => (
+            {processedFobData.map((categoryData, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3 px-4 text-base font-medium text-left flex justify-between items-center">
                   <span className="flex-1">{categoryData.category}</span>
                   <span className="font-normal text-sm text-muted-foreground text-right">
-                    {t("agendaFobStatus.totalItems", { count: categoryData.totalQuantidade })} {/* Translated text with interpolation */}
+                    {t("fobStatusTable.totalItems", { count: categoryData.totalQuantidade })} {/* Translated text with interpolation */}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="p-0">

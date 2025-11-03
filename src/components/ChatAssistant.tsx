@@ -1,21 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Textarea } from "@/components/ui/textarea";
 import { X, Send } from "lucide-react";
+import { useTranslation } from "react-i18next"; // Import useTranslation
 
 interface ChatAssistantProps {
   onClose: () => void;
+  initialInputText?: string | null;
+  onInputTextUsed?: () => void;
 }
 
-export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onClose }) => {
+export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onClose, initialInputText, onInputTextUsed }) => {
+  const { t } = useTranslation(); // Initialize useTranslation
+
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([
-    { sender: "AI", text: "Olá! Como posso ajudar com o seu dashboard hoje?" },
+    { sender: "AI", text: t("chatAssistant.initialMessage") }, // Translated text
   ]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    if (initialInputText) {
+      setInput(initialInputText);
+      if (onInputTextUsed) {
+        onInputTextUsed(); // Notifica o pai que o texto foi usado
+      }
+    }
+  }, [initialInputText, onInputTextUsed]);
 
   const handleSendMessage = () => {
     if (input.trim()) {
@@ -25,7 +39,7 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onClose }) => {
       setTimeout(() => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { sender: "AI", text: `Entendi que você disse: "${input.trim()}". Como posso ajustar o dashboard com base nisso?` },
+          { sender: "AI", text: t("chatAssistant.aiResponsePrefix", { message: input.trim() }) }, // Translated text with interpolation
         ]);
       }, 1000);
     }
@@ -34,8 +48,8 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onClose }) => {
   return (
     <Card className="rounded-none border border-gray-200 shadow-none w-full max-w-3xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-lg">Assistente de Dashboard</CardTitle>
-        <Button variant="ghost" size="icon" onClick={onClose} aria-label="Fechar Assistente">
+        <CardTitle className="text-lg">{t("chatAssistant.title")}</CardTitle> {/* Translated text */}
+        <Button variant="ghost" size="icon" onClick={onClose} aria-label={t("chatWidget.openChat")}> {/* Reusing translation key */}
           <X className="h-4 w-4" />
         </Button>
       </CardHeader>
@@ -61,19 +75,15 @@ export const ChatAssistant: React.FC<ChatAssistantProps> = ({ onClose }) => {
           </div>
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex p-4 border-t border-gray-200">
-        <Input
-          placeholder="Faça uma pergunta ou dê um comando..."
+      <CardFooter className="flex p-4 border-t border-gray-200 items-end">
+        <Textarea
+          placeholder={t("chatAssistant.inputPlaceholder")} // Translated text
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              handleSendMessage();
-            }
-          }}
-          className="flex-1 rounded-none border-gray-300 focus-visible:ring-0 focus-visible:ring-offset-0"
+          rows={5}
+          className="flex-1 rounded-none border-gray-300 focus-visible:ring-0 focus-visible:ring-offset-0 resize-none min-h-[40px]"
         />
-        <Button onClick={handleSendMessage} className="ml-2 rounded-none">
+        <Button onClick={handleSendMessage} className="ml-2 rounded-none h-10">
           <Send className="h-4 w-4" />
         </Button>
       </CardFooter>
