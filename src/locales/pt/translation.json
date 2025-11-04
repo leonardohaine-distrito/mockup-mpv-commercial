@@ -140,24 +140,4 @@
     "returnHome": "Voltar para a Página Inicial"
   },
   "madeWithDyad": "Feito com Dyad"
-  },
-  "kpiLegend": {
-    "title": "Legenda de Regras de Cores dos KPIs",
-    "colorRulesTitle": "Regras para Codificação de Cores dos KPIs",
-    "kpiColumn": "KPI",
-    "greenColumn": "Verde (✓)",
-    "yellowColumn": "Amarelo (!)",
-    "redColumn": "Vermelho (✗)",
-    "fatQuota": "% Fat x Cota",
-    "fatAllocatedQuota": "% Fat + Alocado x Cota",
-    "projectedResolvedQuota": "% Proj. Resolvido x Cota",
-    "totalSalesAdherentQuota": "% Venda Total Aderente x Cota",
-    "totalMonthSalesQuotaM0": "% Venda Total Mês x Cota M0",
-    "greenRuleWeeklyWeight": "≥ peso semanal",
-    "yellowRuleWeeklyWeight": "80–99% do peso",
-    "redRuleWeeklyWeight": "< 80% do peso",
-    "greenRuleAccumulated": "≥ acumulado esperado",
-    "yellowRuleAccumulated": "80–99% acumulado",
-    "redRuleAccumulated": "< 80% acumulado"
-  }
 }

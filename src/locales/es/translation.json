@@ -85,7 +85,7 @@
     "pendingFobItemsByCategory": "Ítems FOB Pendientes por Categoría",
     "totalItems": "Total: {{count}} ítems",
     "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems FOB pendientes, considerando todas las categorías. Utilice los datos completos disponibles de la fuente e incluya modelo, PNC, categoría, cantidad pendiente y voltaje.",
-    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interativo a través del Chat basado en los datos disponibles."
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
   },
   "creditBlockTable": {
     "title": "Bloqueo de Crédito",
@@ -140,24 +140,4 @@
     "returnHome": "Volver a la Página de Inicio"
   },
   "madeWithDyad": "Hecho con Dyad"
-  },
-  "kpiLegend": {
-    "title": "Leyenda de Reglas de Colores de KPIs",
-    "colorRulesTitle": "Reglas para la Codificación de Colores de KPIs",
-    "kpiColumn": "KPI",
-    "greenColumn": "Verde (✓)",
-    "yellowColumn": "Amarillo (!)",
-    "redColumn": "Rojo (✗)",
-    "fatQuota": "% Facturado x Cuota",
-    "fatAllocatedQuota": "% Facturado + Asignado x Cuota",
-    "projectedResolvedQuota": "% Proy. Resuelto x Cuota",
-    "totalSalesAdherentQuota": "% Venta Total Adherente x Cuota",
-    "totalMonthSalesQuotaM0": "% Venta Total Mes x Cuota M0",
-    "greenRuleWeeklyWeight": "≥ peso semanal",
-    "yellowRuleWeeklyWeight": "80–99% del peso",
-    "redRuleWeeklyWeight": "< 80% del peso",
-    "greenRuleAccumulated": "≥ acumulado esperado",
-    "yellowRuleAccumulated": "80–99% acumulado",
-    "redRuleAccumulated": "< 80% acumulado"
-  }
 }
