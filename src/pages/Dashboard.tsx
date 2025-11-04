@@ -14,7 +14,7 @@ import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
-import { ContextBar } from "@/components/ContextBar"; // New import
+import { ContextBar } from "@/components/ContextBar";
 import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
 
 // Helper type for DetailedKpisTable
@@ -75,8 +75,8 @@ const Dashboard: React.FC = () => {
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [suggestedChatInput, setSuggestedChatInput] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedRegional, setSelectedRegional] = useState<string>("all"); // New state
-  const [selectedClient, setSelectedClient] = useState<string>("all");     // New state
+  const [selectedRegional, setSelectedRegional] = useState<string>("all");
+  const [selectedClient, setSelectedClient] = useState<string>("all");
 
   const handleOpenAssistantPrompt = () => {
     setShowActivateButton(true);
@@ -166,12 +166,12 @@ const Dashboard: React.FC = () => {
         <Filters
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
-          selectedRegional={selectedRegional} // Pass new props
-          onRegionalChange={setSelectedRegional} // Pass new props
-          selectedClient={selectedClient}     // Pass new props
-          onClientChange={setSelectedClient}     // Pass new props
+          selectedRegional={selectedRegional}
+          onRegionalChange={setSelectedRegional}
+          selectedClient={selectedClient}
+          onClientChange={setSelectedClient}
         />
-        <ContextBar // New component
+        <ContextBar
           selectedRegional={selectedRegional}
           selectedClient={selectedClient}
           selectedCategory={selectedCategory}
@@ -186,23 +186,25 @@ const Dashboard: React.FC = () => {
         />
         <DetailedKpisTable
           onSuggestChatInput={handleSuggestChatInput}
-          kpiData={filteredDetailedKpisData} // Pass filtered data
+          kpiData={filteredDetailedKpisData}
         />
-        <AgendaFobStatus
-          onSuggestChatInput={handleSuggestChatInput}
-          agendaData={filteredAgendaData} // Pass filtered data
-        />
-        <FobStatusTable
-          onSuggestChatInput={handleSuggestChatInput}
-          fobData={filteredFobData} // Pass filtered data
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> {/* New container for side-by-side layout */}
+          <AgendaFobStatus
+            onSuggestChatInput={handleSuggestChatInput}
+            agendaData={filteredAgendaData}
+          />
+          <FobStatusTable
+            onSuggestChatInput={handleSuggestChatInput}
+            fobData={filteredFobData}
+          />
+        </div>
         <CreditBlockTable
           onSuggestChatInput={handleSuggestChatInput}
-          creditBlockData={filteredCreditBlockData} // Pass filtered data
+          creditBlockData={filteredCreditBlockData}
         />
         <OrderBlockTable
           onSuggestChatInput={handleSuggestChatInput}
-          orderBlockData={filteredOrderBlockData} // Pass filtered data
+          orderBlockData={filteredOrderBlockData}
         />
         <SellInOut
           filteredSellInData={filteredSellInData}
