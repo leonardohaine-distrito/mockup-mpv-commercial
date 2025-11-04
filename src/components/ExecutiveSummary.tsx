@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
-import { DashboardDataItem } from "@/data/dashboardData"; // Import DashboardDataItem type
+import { DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData"; // Import DashboardDataItem and SellInOutDataItem types
 import { useTranslation } from "react-i18next"; // Import useTranslation
 
 interface KpiCardProps {
@@ -37,6 +37,8 @@ interface ExecutiveSummaryProps {
   filteredFobData: DashboardDataItem[];
   filteredCreditBlockData: DashboardDataItem[];
   filteredOrderBlockData: DashboardDataItem[];
+  filteredSellInData: SellInOutDataItem[];
+  filteredSellOutData: SellInOutDataItem[];
 }
 
 export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
@@ -44,6 +46,8 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
   filteredFobData,
   filteredCreditBlockData,
   filteredOrderBlockData,
+  filteredSellInData,
+  filteredSellOutData,
 }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
@@ -81,20 +85,19 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
   const totalCreditBlock = filteredCreditBlockData.filter(item => item.indicador === "Bloq. Crédito").reduce((sum, item) => sum + item.quantidade, 0);
   const totalOrderBlock = filteredOrderBlockData.filter(item => item.indicador === "Ordens Bloq").reduce((sum, item) => sum + item.quantidade, 0);
 
-  // Mock data for Sell-In and Sell-Out totals for current month, previous month, last year month, and current year YTD
-  // These values should ideally come from a more robust data source or context
+  // Calculate Sell-In and Sell-Out totals from filtered data
   const sellInTotals = {
-    currentMonth: 1200 + 850 + 800 + 400,
-    previousMonth: 1100 + 800 + 750 + 380,
-    lastYearMonth: 1000 + 750 + 700 + 350,
-    currentYearYTD: 10000 + 7000 + 6500 + 3200,
+    currentMonth: filteredSellInData.reduce((sum, item) => sum + item.currentMonth, 0),
+    previousMonth: filteredSellInData.reduce((sum, item) => sum + item.prevMonth, 0),
+    lastYearMonth: filteredSellInData.reduce((sum, item) => sum + item.lastYearMonth, 0),
+    currentYearYTD: filteredSellInData.reduce((sum, item) => sum + item.currentYear, 0),
   };
 
   const sellOutTotals = {
-    currentMonth: 1150 + 820 + 780 + 390,
-    previousMonth: 1050 + 780 + 730 + 370,
-    lastYearMonth: 980 + 730 + 680 + 340,
-    currentYearYTD: 9800 + 6900 + 6300 + 3100,
+    currentMonth: filteredSellOutData.reduce((sum, item) => sum + item.currentMonth, 0),
+    previousMonth: filteredSellOutData.reduce((sum, item) => sum + item.prevMonth, 0),
+    lastYearMonth: filteredSellOutData.reduce((sum, item) => sum + item.lastYearMonth, 0),
+    currentYearYTD: filteredSellOutData.reduce((sum, item) => sum + item.currentYear, 0),
   };
 
   return (

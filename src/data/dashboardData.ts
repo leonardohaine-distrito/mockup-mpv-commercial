@@ -11,6 +11,15 @@ export interface DashboardDataItem {
   quantidade: number;
 }
 
+export interface SellInOutDataItem {
+  category: string;
+  currentMonth: number;
+  prevMonth: number;
+  lastYearMonth: number;
+  currentYear: number;
+  lastYear: number;
+}
+
 export const rawAgendaData: DashboardDataItem[] = [
   { category: "FOGOES", commercialLineGroup: "FOGAO 76CM", replacedProduct2: "5Q 6Q-SINGLE-GLASS", modelo: "FC5GB", pnc: "926565346", voltage: "DUAL VOLTAGE", tabela: "GATE", indicador: "Aguard. Ret. de Agenda", periodo: "30/10/2025", quantidade: 57 },
   { category: "FOGOES", commercialLineGroup: "FOGAO MENOR 76CM", replacedProduct2: "4Q-SINGLE-GLASS", modelo: "FC4GB", pnc: "926565345", voltage: "DUAL VOLTAGE", tabela: "GATE", indicador: "Aguard. Ret. de Agenda", periodo: "30/10/2025", quantidade: 184 },
@@ -53,4 +62,18 @@ export const rawOrderBlockData: DashboardDataItem[] = [
   { category: "FOGOES", commercialLineGroup: "FOGAO MENOR 76CM", replacedProduct2: "4Q-SINGLE-GLASS", modelo: "FC4GB", pnc: "926565345", voltage: "DUAL VOLTAGE", tabela: "GATE", indicador: "Ordens Bloq", periodo: "30/10/2025", quantidade: 184 },
   { category: "MICROONDAS", commercialLineGroup: "MICROONDAS NACIONAL", replacedProduct2: "FAMILIA", modelo: "ME36S", pnc: "947005193", voltage: "220 VOLT", tabela: "GATE", indicador: "Ordens Bloq", periodo: "30/10/2025", quantidade: 40 },
   { category: "MICROONDAS", commercialLineGroup: "MICROONDAS NACIONAL", replacedProduct2: "COMPACTO", modelo: "MC21B", pnc: "947005201", voltage: "220 VOLT", tabela: "GATE", indicador: "Ordens Bloq", periodo: "30/10/2025", quantidade: 2 },
+];
+
+export const rawSellInData: SellInOutDataItem[] = [
+  { category: "REFRIGERADORES", currentMonth: 1200, prevMonth: 1100, lastYearMonth: 1000, currentYear: 10000, lastYear: 9500 },
+  { category: "LAVADORAS", currentMonth: 850, prevMonth: 800, lastYearMonth: 750, currentYear: 7000, lastYear: 6800 },
+  { category: "FOGOES", currentMonth: 800, prevMonth: 750, lastYearMonth: 700, currentYear: 6500, lastYear: 6000 },
+  { category: "MICROONDAS", currentMonth: 400, prevMonth: 380, lastYearMonth: 350, currentYear: 3200, lastYear: 3000 },
+];
+
+export const rawSellOutData: SellInOutDataItem[] = [
+  { category: "REFRIGERADORES", currentMonth: 1150, prevMonth: 1050, lastYearMonth: 980, currentYear: 9800, lastYear: 9300 },
+  { category: "LAVADORAS", currentMonth: 820, prevMonth: 780, lastYearMonth: 730, currentYear: 6900, lastYear: 6700 },
+  { category: "FOGOES", currentMonth: 780, prevMonth: 730, lastYearMonth: 680, currentYear: 6300, lastYear: 5800 },
+  { category: "MICROONDAS", currentMonth: 390, prevMonth: 370, lastYearMonth: 340, currentYear: 3100, lastYear: 2900 },
 ];

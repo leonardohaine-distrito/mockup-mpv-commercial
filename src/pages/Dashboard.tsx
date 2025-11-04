@@ -14,7 +14,7 @@ import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
-import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, DashboardDataItem } from "@/data/dashboardData";
+import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
 
 // Helper type for DetailedKpisTable
 interface KpiDetail {
@@ -114,6 +114,16 @@ const Dashboard: React.FC = () => {
     return rawOrderBlockData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
   }, [selectedCategory]);
 
+  const filteredSellInData = useMemo(() => {
+    if (selectedCategory === "all") return rawSellInData;
+    return rawSellInData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
+  const filteredSellOutData = useMemo(() => {
+    if (selectedCategory === "all") return rawSellOutData;
+    return rawSellOutData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
   // Combine all raw data for the DetailedKpisTable transformation
   const allRawData = useMemo(() => [
     ...rawAgendaData,
@@ -153,6 +163,8 @@ const Dashboard: React.FC = () => {
           filteredFobData={filteredFobData}
           filteredCreditBlockData={filteredCreditBlockData}
           filteredOrderBlockData={filteredOrderBlockData}
+          filteredSellInData={filteredSellInData}
+          filteredSellOutData={filteredSellOutData}
         />
         <DetailedKpisTable
           onSuggestChatInput={handleSuggestChatInput}
@@ -174,7 +186,10 @@ const Dashboard: React.FC = () => {
           onSuggestChatInput={handleSuggestChatInput}
           orderBlockData={filteredOrderBlockData} // Pass filtered data
         />
-        <SellInOut />
+        <SellInOut
+          filteredSellInData={filteredSellInData}
+          filteredSellOutData={filteredSellOutData}
+        />
         <Recommendations />
       </div>
       <ChatWidget onOpenAssistantPrompt={handleOpenAssistantPrompt} />
