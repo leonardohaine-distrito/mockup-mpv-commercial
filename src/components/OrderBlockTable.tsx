@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PackageX, MessageSquare } from "lucide-react";
-import { rawOrderBlockData } from "@/data/dashboardData";
+import { DashboardDataItem } from "@/data/dashboardData"; // Import DashboardDataItem type
 import { useTranslation } from "react-i18next"; // Import useTranslation
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -23,40 +23,42 @@ interface BlockCategory {
   details: BlockItem[];
 }
 
-const groupedOrderBlockData: { [key: string]: BlockItem[] } = {};
-rawOrderBlockData.filter(item => item.indicador === "Ordens Bloq").forEach(item => {
-  const categoryKey = item.category.toUpperCase();
-  if (!groupedOrderBlockData[categoryKey]) {
-    groupedOrderBlockData[categoryKey] = [];
-  }
-  groupedOrderBlockData[categoryKey].push({
-    modelo: item.modelo,
-    pnc: item.pnc,
-    voltage: item.voltage,
-    quantidade: item.quantidade,
-  });
-});
-
-const orderedCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
-const processedOrderBlockData: BlockCategory[] = orderedCategories.map(category => {
-  const details = groupedOrderBlockData[category] || [];
-  const totalQuantidade = details.reduce((sum, item) => sum + item.quantidade, 0);
-  return {
-    category: category,
-    totalQuantidade: totalQuantidade,
-    details: details,
-  };
-}).filter(category => category.details.length > 0);
-
 interface OrderBlockTableProps {
   onSuggestChatInput: (text: string) => void;
+  orderBlockData: DashboardDataItem[]; // New prop for filtered order block data
 }
 
-export const OrderBlockTable: React.FC<OrderBlockTableProps> = ({ onSuggestChatInput }) => {
+export const OrderBlockTable: React.FC<OrderBlockTableProps> = ({ onSuggestChatInput, orderBlockData }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
   const chatSuggestionText = t("orderBlockTable.chatSuggestionText");
   const chatSuggestionTooltip = t("orderBlockTable.chatSuggestionTooltip");
+
+  // Grouping and ordering logic using the orderBlockData prop
+  const groupedOrderBlockData: { [key: string]: BlockItem[] } = {};
+  orderBlockData.filter(item => item.indicador === "Ordens Bloq").forEach(item => {
+    const categoryKey = item.category.toUpperCase();
+    if (!groupedOrderBlockData[categoryKey]) {
+      groupedOrderBlockData[categoryKey] = [];
+    }
+    groupedOrderBlockData[categoryKey].push({
+      modelo: item.modelo,
+      pnc: item.pnc,
+      voltage: item.voltage,
+      quantidade: item.quantidade,
+    });
+  });
+
+  const orderedCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
+  const processedOrderBlockData: BlockCategory[] = orderedCategories.map(category => {
+    const details = groupedOrderBlockData[category] || [];
+    const totalQuantidade = details.reduce((sum, item) => sum + item.quantidade, 0);
+    return {
+      category: category,
+      totalQuantidade: totalQuantidade,
+      details: details,
+    };
+  }).filter(category => category.details.length > 0);
 
   return (
     <section className="space-y-4">

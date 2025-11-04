@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
-import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData } from "@/data/dashboardData";
+import { DashboardDataItem } from "@/data/dashboardData"; // Import DashboardDataItem type
 import { useTranslation } from "react-i18next"; // Import useTranslation
 
 interface KpiCardProps {
@@ -32,13 +32,25 @@ const KpiCard: React.FC<KpiCardProps> = ({ title, value, description }) => (
   </Card>
 );
 
-export const ExecutiveSummary: React.FC = () => {
+interface ExecutiveSummaryProps {
+  filteredAgendaData: DashboardDataItem[];
+  filteredFobData: DashboardDataItem[];
+  filteredCreditBlockData: DashboardDataItem[];
+  filteredOrderBlockData: DashboardDataItem[];
+}
+
+export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
+  filteredAgendaData,
+  filteredFobData,
+  filteredCreditBlockData,
+  filteredOrderBlockData,
+}) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
   const kpis = [
     {
       title: t("executiveSummary.fatQuota"),
-      value: "85%",
+      value: "85%", // These percentages are static for now
       description: t("executiveSummary.fatQuotaDescription"),
     },
     {
@@ -63,11 +75,11 @@ export const ExecutiveSummary: React.FC = () => {
     },
   ];
 
-  // Calculate totals for the new summary card
-  const totalAgenda = rawAgendaData.reduce((sum, item) => sum + item.quantidade, 0);
-  const totalFob = rawFobData.filter(item => item.indicador === "FOB Pendente").reduce((sum, item) => sum + item.quantidade, 0);
-  const totalCreditBlock = rawCreditBlockData.filter(item => item.indicador === "Bloq. Crédito").reduce((sum, item) => sum + item.quantidade, 0);
-  const totalOrderBlock = rawOrderBlockData.filter(item => item.indicador === "Ordens Bloq").reduce((sum, item) => sum + item.quantidade, 0);
+  // Calculate totals using filtered data
+  const totalAgenda = filteredAgendaData.reduce((sum, item) => sum + item.quantidade, 0);
+  const totalFob = filteredFobData.filter(item => item.indicador === "FOB Pendente").reduce((sum, item) => sum + item.quantidade, 0);
+  const totalCreditBlock = filteredCreditBlockData.filter(item => item.indicador === "Bloq. Crédito").reduce((sum, item) => sum + item.quantidade, 0);
+  const totalOrderBlock = filteredOrderBlockData.filter(item => item.indicador === "Ordens Bloq").reduce((sum, item) => sum + item.quantidade, 0);
 
   // Mock data for Sell-In and Sell-Out totals for current month, previous month, last year month, and current year YTD
   // These values should ideally come from a more robust data source or context

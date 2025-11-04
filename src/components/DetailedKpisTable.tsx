@@ -24,42 +24,12 @@ interface KpiCategory {
   details: KpiDetail[];
 }
 
-const mockData: KpiCategory[] = [
-  {
-    category: "REFRIGERADORES",
-    details: [
-      { modelo: "TF41", pnc: "924263191", voltage: "220 VOLT", cota: 200, faturado: 180, alocado: 10, faltaVenda: 10 },
-      { modelo: "IT70", pnc: "924263014", voltage: "DUAL VOLTAGE", cota: 150, faturado: 150, alocado: 0, faltaVenda: 0 },
-    ],
-  },
-  {
-    category: "LAVADORAS",
-    details: [
-      { modelo: "LED14", pnc: "900941713", voltage: "220 VOLT", cota: 120, faturado: 90, alocado: 15, faltaVenda: 15 },
-      { modelo: "LEE15", pnc: "900941884", voltage: "127 VOLT", cota: 100, faturado: 110, alocado: 0, faltaVenda: -10 },
-    ],
-  },
-  {
-    category: "FOGÕES",
-    details: [
-      { modelo: "FS50", pnc: "946501234", voltage: "127 VOLT", cota: 100, faturado: 70, alocado: 15, faltaVenda: 15 },
-      { modelo: "FC60", pnc: "946505678", voltage: "220 VOLT", cota: 80, faturado: 60, alocado: 10, faltaVenda: 10 },
-    ],
-  },
-  {
-    category: "MICROONDAS",
-    details: [
-      { modelo: "MTD30", pnc: "947005124", voltage: "220 VOLT", cota: 80, faturado: 70, alocado: 5, faltaVenda: 5 },
-      { modelo: "ME36B", pnc: "947005190", voltage: "127 VOLT", cota: 60, faturado: 60, alocado: 0, faltaVenda: 0 },
-    ],
-  },
-];
-
 interface DetailedKpisTableProps {
   onSuggestChatInput: (text: string) => void;
+  kpiData: KpiCategory[]; // New prop for filtered KPI data
 }
 
-export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestChatInput }) => {
+export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestChatInput, kpiData }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
   const chatSuggestionText = t("detailedKpisTable.chatSuggestionText");
@@ -90,13 +60,11 @@ export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestC
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
-            {mockData.map((categoryData, index) => {
+            {kpiData.map((categoryData, index) => { // Use kpiData prop
               const totalCota = categoryData.details.reduce((sum, item) => sum + item.cota, 0);
               const totalFaturado = categoryData.details.reduce((sum, item) => sum + item.faturado, 0);
               const totalAlocado = categoryData.details.reduce((sum, item) => sum + item.alocado, 0);
               const totalFaltaVenda = categoryData.details.reduce((sum, item) => sum + item.faltaVenda, 0);
-              // const overallAtingimento = totalCota > 0 ? (((totalFaturado + totalAlocado) / totalCota) * 100).toFixed(0) + "%" : "0%";
-
 
               return (
                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">

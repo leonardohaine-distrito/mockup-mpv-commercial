@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Layout } from "@/components/Layout";
 import { Filters } from "@/components/Filters";
 import { ExecutiveSummary } from "@/components/ExecutiveSummary";
@@ -9,17 +9,68 @@ import { AgendaFobStatus } from "@/components/AgendaFobStatus";
 import { FobStatusTable } from "@/components/FobStatusTable";
 import { CreditBlockTable } from "@/components/CreditBlockTable";
 import { OrderBlockTable } from "@/components/OrderBlockTable";
-// import { BlocksSection } from "@/components/BlocksSection"; // Removed
 import { SellInOut } from "@/components/SellInOut";
 import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
+import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, DashboardDataItem } from "@/data/dashboardData";
+
+// Helper type for DetailedKpisTable
+interface KpiDetail {
+  modelo: string;
+  pnc: string;
+  voltage: string;
+  cota: number;
+  faturado: number;
+  alocado: number;
+  faltaVenda: number;
+}
+
+interface KpiCategory {
+  category: string;
+  details: KpiDetail[];
+}
+
+// Function to transform DashboardDataItem into KpiCategory for DetailedKpisTable
+const transformToKpiCategories = (data: DashboardDataItem[]): KpiCategory[] => {
+  const grouped: { [key: string]: KpiDetail[] } = {};
+
+  data.forEach(item => {
+    const categoryKey = item.category.toUpperCase();
+    if (!grouped[categoryKey]) {
+      grouped[categoryKey] = [];
+    }
+    // Simple mock transformation for KPI details based on 'quantidade'
+    const faturado = item.quantidade;
+    const cota = Math.round(faturado * 1.2); // Example: quota is 20% higher than billed
+    const alocado = Math.round(faturado * 0.1); // Example: 10% of billed is allocated
+    const faltaVenda = cota - faturado - alocado;
+
+    grouped[categoryKey].push({
+      modelo: item.modelo,
+      pnc: item.pnc,
+      voltage: item.voltage,
+      cota,
+      faturado,
+      alocado,
+      faltaVenda,
+    });
+  });
+
+  const orderedCategories = ["REFRIGERADORES", "LAVADORAS", "FOGOES", "MICROONDAS"];
+  return orderedCategories.map(category => ({
+    category: category,
+    details: grouped[category] || [],
+  })).filter(cat => cat.details.length > 0);
+};
+
 
 const Dashboard: React.FC = () => {
   const [showActivateButton, setShowActivateButton] = useState(false);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [suggestedChatInput, setSuggestedChatInput] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all"); // New state for category filter
 
   const handleOpenAssistantPrompt = () => {
     setShowActivateButton(true);
@@ -27,20 +78,57 @@ const Dashboard: React.FC = () => {
 
   const handleActivateChat = () => {
     setShowChatAssistant(true);
-    setShowActivateButton(false); // Esconde o botão "Iniciar Assistente" quando o chat é aberto
+    setShowActivateButton(false);
   };
 
   const handleCloseChat = () => {
     setShowChatAssistant(false);
-    setShowActivateButton(false); // Esconde o botão "Iniciar Assistente" quando o chat é fechado
-    setSuggestedChatInput(null); // Limpa a sugestão ao fechar o chat
+    setShowActivateButton(false);
+    setSuggestedChatInput(null);
   };
 
   const handleSuggestChatInput = (text: string) => {
     setSuggestedChatInput(text);
-    setShowChatAssistant(true); // Abre o assistente de chat
-    setShowActivateButton(false); // Esconde o botão "Iniciar Assistente"
+    setShowChatAssistant(true);
+    setShowActivateButton(false);
   };
+
+  // Filter data based on selectedCategory
+  const filteredAgendaData = useMemo(() => {
+    if (selectedCategory === "all") return rawAgendaData;
+    return rawAgendaData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
+  const filteredFobData = useMemo(() => {
+    if (selectedCategory === "all") return rawFobData;
+    return rawFobData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
+  const filteredCreditBlockData = useMemo(() => {
+    if (selectedCategory === "all") return rawCreditBlockData;
+    return rawCreditBlockData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
+  const filteredOrderBlockData = useMemo(() => {
+    if (selectedCategory === "all") return rawOrderBlockData;
+    return rawOrderBlockData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+  }, [selectedCategory]);
+
+  // Combine all raw data for the DetailedKpisTable transformation
+  const allRawData = useMemo(() => [
+    ...rawAgendaData,
+    ...rawFobData,
+    ...rawCreditBlockData,
+    ...rawOrderBlockData,
+  ], []);
+
+  const filteredDetailedKpisData = useMemo(() => {
+    const dataToProcess = selectedCategory === "all"
+      ? allRawData
+      : allRawData.filter(item => item.category.toUpperCase() === selectedCategory.toUpperCase());
+    return transformToKpiCategories(dataToProcess);
+  }, [selectedCategory, allRawData]);
+
 
   return (
     <Layout>
@@ -50,7 +138,7 @@ const Dashboard: React.FC = () => {
             <ChatAssistant
               onClose={handleCloseChat}
               initialInputText={suggestedChatInput}
-              onInputTextUsed={() => setSuggestedChatInput(null)} // Limpa a sugestão após ser usada
+              onInputTextUsed={() => setSuggestedChatInput(null)}
             />
           </div>
         )}
@@ -59,14 +147,33 @@ const Dashboard: React.FC = () => {
             <ActivateChatButton onActivate={handleActivateChat} />
           </div>
         )}
-        <Filters />
-        <ExecutiveSummary />
-        <DetailedKpisTable onSuggestChatInput={handleSuggestChatInput} />
-        <AgendaFobStatus onSuggestChatInput={handleSuggestChatInput} />
-        <FobStatusTable onSuggestChatInput={handleSuggestChatInput} />
-        <CreditBlockTable onSuggestChatInput={handleSuggestChatInput} />
-        <OrderBlockTable onSuggestChatInput={handleSuggestChatInput} />
-        {/* <BlocksSection /> -- Removed */}
+        <Filters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
+        <ExecutiveSummary
+          filteredAgendaData={filteredAgendaData}
+          filteredFobData={filteredFobData}
+          filteredCreditBlockData={filteredCreditBlockData}
+          filteredOrderBlockData={filteredOrderBlockData}
+        />
+        <DetailedKpisTable
+          onSuggestChatInput={handleSuggestChatInput}
+          kpiData={filteredDetailedKpisData} // Pass filtered data
+        />
+        <AgendaFobStatus
+          onSuggestChatInput={handleSuggestChatInput}
+          agendaData={filteredAgendaData} // Pass filtered data
+        />
+        <FobStatusTable
+          onSuggestChatInput={handleSuggestChatInput}
+          fobData={filteredFobData} // Pass filtered data
+        />
+        <CreditBlockTable
+          onSuggestChatInput={handleSuggestChatInput}
+          creditBlockData={filteredCreditBlockData} // Pass filtered data
+        />
+        <OrderBlockTable
+          onSuggestChatInput={handleSuggestChatInput}
+          orderBlockData={filteredOrderBlockData} // Pass filtered data
+        />
         <SellInOut />
         <Recommendations />
       </div>

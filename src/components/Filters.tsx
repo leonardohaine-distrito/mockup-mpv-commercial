@@ -5,7 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "react-i18next"; // Import useTranslation
 
-export const Filters: React.FC = () => {
+interface FiltersProps {
+  selectedCategory: string;
+  onCategoryChange: (category: string) => void;
+}
+
+export const Filters: React.FC<FiltersProps> = ({ selectedCategory, onCategoryChange }) => {
   const { t } = useTranslation(); // Initialize useTranslation
 
   return (
@@ -41,11 +46,12 @@ export const Filters: React.FC = () => {
 
       <div className="flex items-center gap-2">
         <Label htmlFor="category-filter">{t("filters.categoryLabel")}</Label> {/* Translated text */}
-        <Select>
+        <Select onValueChange={onCategoryChange} value={selectedCategory}>
           <SelectTrigger id="category-filter" className="w-[180px] rounded-none border-gray-300">
             <SelectValue placeholder={t("filters.selectCategoryPlaceholder")} /> {/* Translated text */}
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="all">{t("filters.allCategories")}</SelectItem> {/* New 'All' option */}
             <SelectItem value="refrigeradores">{t("filters.refrigerators")}</SelectItem>
             <SelectItem value="lavadoras">{t("filters.washers")}</SelectItem>
             <SelectItem value="fogoes">{t("filters.stoves")}</SelectItem>
