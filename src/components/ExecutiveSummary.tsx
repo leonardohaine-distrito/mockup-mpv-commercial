@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { HelpCircle } from "lucide-react";
 import { DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData"; // Import DashboardDataItem and SellInOutDataItem types
 import { useTranslation } from "react-i18next"; // Import useTranslation
+import { DashboardInterpretationModal } from "./DashboardInterpretationModal"; // Import the new modal component
 
 interface KpiCardProps {
   title: string;
@@ -102,7 +103,10 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
 
   return (
     <section className="space-y-4">
-      <h2 className="text-2xl font-semibold border-b border-gray-200 pb-2">{t("executiveSummary.title")}</h2> {/* Translated text */}
+      <div className="flex items-center justify-between border-b border-gray-200 pb-2">
+        <h2 className="text-2xl font-semibold">{t("executiveSummary.title")}</h2> {/* Translated text */}
+        <DashboardInterpretationModal /> {/* Add the interpretation modal button here */}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {kpis.map((kpi, index) => (
           <KpiCard key={index} {...kpi} />
