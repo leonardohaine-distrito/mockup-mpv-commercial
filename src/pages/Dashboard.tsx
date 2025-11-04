@@ -188,7 +188,7 @@ const Dashboard: React.FC = () => {
           onSuggestChatInput={handleSuggestChatInput}
           kpiData={filteredDetailedKpisData}
         />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> {/* New container for side-by-side layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <AgendaFobStatus
             onSuggestChatInput={handleSuggestChatInput}
             agendaData={filteredAgendaData}
@@ -198,14 +198,16 @@ const Dashboard: React.FC = () => {
             fobData={filteredFobData}
           />
         </div>
-        <CreditBlockTable
-          onSuggestChatInput={handleSuggestChatInput}
-          creditBlockData={filteredCreditBlockData}
-        />
-        <OrderBlockTable
-          onSuggestChatInput={handleSuggestChatInput}
-          orderBlockData={filteredOrderBlockData}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> {/* New container for side-by-side layout */}
+          <CreditBlockTable
+            onSuggestChatInput={handleSuggestChatInput}
+            creditBlockData={filteredCreditBlockData}
+          />
+          <OrderBlockTable
+            onSuggestChatInput={handleSuggestChatInput}
+            orderBlockData={filteredOrderBlockData}
+          />
+        </div>
         <SellInOut
           filteredSellInData={filteredSellInData}
           filteredSellOutData={filteredSellOutData}
