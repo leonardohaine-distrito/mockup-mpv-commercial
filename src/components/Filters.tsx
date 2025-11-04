@@ -32,9 +32,9 @@ export const Filters: React.FC = () => {
             <SelectValue placeholder={t("filters.selectClientPlaceholder")} /> {/* Translated text */}
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="client-a">Cliente A</SelectItem>
-            <SelectItem value="client-b">Cliente B</SelectItem>
-            <SelectItem value="client-c">Cliente C</SelectItem>
+            <SelectItem value="magazine-luiza">{t("filters.magazineLuiza")}</SelectItem>
+            <SelectItem value="casas-bahia">{t("filters.casasBahia")}</SelectItem>
+            <SelectItem value="gazin">{t("filters.gazin")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -46,9 +46,10 @@ export const Filters: React.FC = () => {
             <SelectValue placeholder={t("filters.selectCategoryPlaceholder")} /> {/* Translated text */}
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="category-x">Categoria X</SelectItem>
-            <SelectItem value="category-y">Categoria Y</SelectItem>
-            <SelectItem value="category-z">Categoria Z</SelectItem>
+            <SelectItem value="refrigeradores">{t("filters.refrigerators")}</SelectItem>
+            <SelectItem value="lavadoras">{t("filters.washers")}</SelectItem>
+            <SelectItem value="fogoes">{t("filters.stoves")}</SelectItem>
+            <SelectItem value="microondas">{t("filters.microwaves")}</SelectItem>
           </SelectContent>
         </Select>
       </div>

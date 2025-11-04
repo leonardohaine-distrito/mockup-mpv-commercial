@@ -15,8 +15,15 @@
     "west": "West",
     "clientLabel": "Client:",
     "selectClientPlaceholder": "Select Client",
+    "magazineLuiza": "Magazine Luiza",
+    "casasBahia": "Casas Bahia",
+    "gazin": "Gazin",
     "categoryLabel": "Category:",
-    "selectCategoryPlaceholder": "Select Category"
+    "selectCategoryPlaceholder": "Select Category",
+    "refrigerators": "Refrigerators",
+    "washers": "Washers",
+    "stoves": "Stoves",
+    "microwaves": "Microwaves"
   },
   "executiveSummary": {
     "title": "Executive Summary",

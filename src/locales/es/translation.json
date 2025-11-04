@@ -15,8 +15,15 @@
     "west": "Oeste",
     "clientLabel": "Cliente:",
     "selectClientPlaceholder": "Seleccionar Cliente",
+    "magazineLuiza": "Magazine Luiza",
+    "casasBahia": "Casas Bahia",
+    "gazin": "Gazin",
     "categoryLabel": "Categoría:",
-    "selectCategoryPlaceholder": "Seleccionar Categoría"
+    "selectCategoryPlaceholder": "Seleccionar Categoría",
+    "refrigerators": "Refrigeradores",
+    "washers": "Lavadoras",
+    "stoves": "Estufas",
+    "microwaves": "Microondas"
   },
   "executiveSummary": {
     "title": "Resumen Ejecutivo",
