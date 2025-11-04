@@ -139,8 +139,7 @@
     "message": "Oops! Page not found",
     "returnHome": "Return to Home"
   },
-  "madeWithDyad": "Made with Dyad"
-  },
+  "madeWithDyad": "Made with Dyad",
   "kpiLegend": {
     "title": "KPI Color Rules Legend",
     "colorRulesTitle": "Rules for KPI Color Coding",

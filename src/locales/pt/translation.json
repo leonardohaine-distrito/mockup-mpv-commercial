@@ -139,8 +139,7 @@
     "message": "Oops! Página não encontrada",
     "returnHome": "Voltar para a Página Inicial"
   },
-  "madeWithDyad": "Feito com Dyad"
-  },
+  "madeWithDyad": "Feito com Dyad",
   "kpiLegend": {
     "title": "Legenda de Regras de Cores dos KPIs",
     "colorRulesTitle": "Regras para Codificação de Cores dos KPIs",
