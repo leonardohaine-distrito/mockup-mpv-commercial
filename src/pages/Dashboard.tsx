@@ -8,7 +8,7 @@ import { DetailedKpisTable } from "@/components/DetailedKpisTable";
 import { AgendaFobStatus } from "@/components/AgendaFobStatus";
 import { FobStatusTable } from "@/components/FobStatusTable";
 import { CreditBlockTable } from "@/components/CreditBlockTable";
-import { OrderBlockTable } from "@/components/OrderBlockTable";
+import { OrderBlockTable } = "@/components/OrderBlockTable";
 import { SellInOut } from "@/components/SellInOut";
 import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
