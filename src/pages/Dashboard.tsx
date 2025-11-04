@@ -13,9 +13,14 @@ import { SellInOut } from "@/components/SellInOut";
 import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
-import { ActivateChatButton } from "@/components/ActivateChatButton";
 import { ContextBar } from "@/components/ContextBar";
 import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"; // Import Dialog components
 
 // Helper type for DetailedKpisTable
 interface KpiDetail {
@@ -71,32 +76,24 @@ const transformToKpiCategories = (data: DashboardDataItem[]): KpiCategory[] => {
 
 
 const Dashboard: React.FC = () => {
-  const [showActivateButton, setShowActivateButton] = useState(false);
-  const [showChatAssistant, setShowChatAssistant] = useState(false);
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false); // Renamed state for modal
   const [suggestedChatInput, setSuggestedChatInput] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedRegional, setSelectedRegional] = useState<string>("all");
   const [selectedClient, setSelectedClient] = useState<string>("all");
 
-  const handleOpenAssistantPrompt = () => {
-    setShowActivateButton(true);
+  const handleOpenChatModal = () => {
+    setIsChatModalOpen(true);
   };
 
-  const handleActivateChat = () => {
-    setShowChatAssistant(true);
-    setShowActivateButton(false);
-  };
-
-  const handleCloseChat = () => {
-    setShowChatAssistant(false);
-    setShowActivateButton(false);
+  const handleCloseChatModal = () => {
+    setIsChatModalOpen(false);
     setSuggestedChatInput(null);
   };
 
   const handleSuggestChatInput = (text: string) => {
     setSuggestedChatInput(text);
-    setShowChatAssistant(true);
-    setShowActivateButton(false);
+    setIsChatModalOpen(true); // Open modal when suggestion is made
   };
 
   // Filter data based on selectedCategory
@@ -149,20 +146,18 @@ const Dashboard: React.FC = () => {
   return (
     <Layout>
       <div className="space-y-8">
-        {showChatAssistant && (
-          <div className="mb-8">
+        {/* Chat Assistant Modal */}
+        <Dialog open={isChatModalOpen} onOpenChange={setIsChatModalOpen}>
+          <DialogContent className="sm:max-w-[600px] p-0"> {/* Adjusted max-width and padding */}
+            {/* ChatAssistant already has its own Card structure, so we just render it */}
             <ChatAssistant
-              onClose={handleCloseChat}
+              onClose={handleCloseChatModal}
               initialInputText={suggestedChatInput}
               onInputTextUsed={() => setSuggestedChatInput(null)}
             />
-          </div>
-        )}
-        {showActivateButton && !showChatAssistant && (
-          <div className="mb-8">
-            <ActivateChatButton onActivate={handleActivateChat} />
-          </div>
-        )}
+          </DialogContent>
+        </Dialog>
+
         <Filters
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
@@ -198,7 +193,7 @@ const Dashboard: React.FC = () => {
             fobData={filteredFobData}
           />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> {/* New container for side-by-side layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <CreditBlockTable
             onSuggestChatInput={handleSuggestChatInput}
             creditBlockData={filteredCreditBlockData}
@@ -214,7 +209,7 @@ const Dashboard: React.FC = () => {
         />
         <Recommendations />
       </div>
-      <ChatWidget onOpenAssistantPrompt={handleOpenAssistantPrompt} />
+      <ChatWidget onOpenAssistantPrompt={handleOpenChatModal} /> {/* ChatWidget now opens the modal */}
     </Layout>
   );
 };
