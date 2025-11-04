@@ -25,6 +25,7 @@ interface KpiDetail {
   faturado: number;
   alocado: number;
   faltaVenda: number;
+  vendaTotal: number; // Added vendaTotal
 }
 
 interface KpiCategory {
@@ -46,6 +47,7 @@ const transformToKpiCategories = (data: DashboardDataItem[]): KpiCategory[] => {
     const cota = Math.round(faturado * 1.2); // Example: quota is 20% higher than billed
     const alocado = Math.round(faturado * 0.1); // Example: 10% of billed is allocated
     const faltaVenda = cota - faturado - alocado;
+    const vendaTotal = faturado + alocado; // Calculate vendaTotal
 
     grouped[categoryKey].push({
       modelo: item.modelo,
@@ -55,6 +57,7 @@ const transformToKpiCategories = (data: DashboardDataItem[]): KpiCategory[] => {
       faturado,
       alocado,
       faltaVenda,
+      vendaTotal, // Include vendaTotal
     });
   });
 

@@ -17,6 +17,7 @@ interface KpiDetail {
   faturado: number;
   alocado: number;
   faltaVenda: number;
+  vendaTotal: number; // Added vendaTotal
 }
 
 interface KpiCategory {
@@ -65,16 +66,18 @@ export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestC
               const totalFaturado = categoryData.details.reduce((sum, item) => sum + item.faturado, 0);
               const totalAlocado = categoryData.details.reduce((sum, item) => sum + item.alocado, 0);
               const totalFaltaVenda = categoryData.details.reduce((sum, item) => sum + item.faltaVenda, 0);
+              const totalVendaTotal = categoryData.details.reduce((sum, item) => sum + item.vendaTotal, 0); // Calculate totalVendaTotal
 
               return (
                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-b-0">
                   <AccordionTrigger className="hover:no-underline py-3 px-4 text-base font-medium text-left flex justify-between items-center">
                     <span className="flex-1">{categoryData.category}</span>
-                    <div className="flex-1 grid grid-cols-4 text-right gap-4 min-w-[400px]">
+                    <div className="flex-1 grid grid-cols-5 text-right gap-4 min-w-[500px]"> {/* Adjusted grid-cols */}
                       <span className="font-normal text-sm text-muted-foreground">{t("detailedKpisTable.quota")} {totalCota}</span> {/* Translated text */}
                       <span className="font-normal text-sm text-muted-foreground">{t("detailedKpisTable.billed")} {totalFaturado}</span> {/* Translated text */}
                       <span className="font-normal text-sm text-muted-foreground">{t("detailedKpisTable.allocated")} {totalAlocado}</span> {/* Translated text */}
                       <span className="font-normal text-sm text-muted-foreground">{t("detailedKpisTable.salesShortfall")} {totalFaltaVenda}</span> {/* Translated text */}
+                      <span className="font-normal text-sm text-muted-foreground">{t("detailedKpisTable.totalSales")} {totalVendaTotal}</span> {/* Display totalVendaTotal */}
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="p-0">
@@ -89,6 +92,7 @@ export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestC
                             <TableHead className="text-right">{t("detailedKpisTable.billed")}</TableHead> {/* Translated text */}
                             <TableHead className="text-right">{t("detailedKpisTable.allocated")}</TableHead> {/* Translated text */}
                             <TableHead className="text-right">{t("detailedKpisTable.salesShortfall")}</TableHead> {/* Translated text */}
+                            <TableHead className="text-right">{t("detailedKpisTable.totalSales")}</TableHead> {/* New TableHead for Venda Total */}
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -105,6 +109,7 @@ export const DetailedKpisTable: React.FC<DetailedKpisTableProps> = ({ onSuggestC
                                   {item.faltaVenda}
                                 </span>
                               </TableCell>
+                              <TableCell className="text-right">{item.vendaTotal}</TableCell> {/* Display vendaTotal */}
                             </TableRow>
                           ))}
                         </TableBody>

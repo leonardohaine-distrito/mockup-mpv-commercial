@@ -65,6 +65,7 @@
     "billed": "Billed:",
     "allocated": "Allocated:",
     "salesShortfall": "Sales Shortfall:",
+    "totalSales": "Total Sales:",
     "model": "Model",
     "pnc": "PNC",
     "voltage": "Voltage",
