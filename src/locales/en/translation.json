@@ -13,11 +13,13 @@
     "south": "South",
     "east": "East",
     "west": "West",
+    "allRegionals": "All Regionals",
     "clientLabel": "Client:",
     "selectClientPlaceholder": "Select Client",
     "magazineLuiza": "Magazine Luiza",
     "casasBahia": "Casas Bahia",
     "gazin": "Gazin",
+    "allClients": "All Clients",
     "categoryLabel": "Category:",
     "selectCategoryPlaceholder": "Select Category",
     "allCategories": "All Categories",
@@ -187,5 +189,12 @@
     "interpretationExample2": "A red 'Credit Blockage' KPI means more than 5% of orders are blocked by credit, signaling an urgent need for action to release these orders.",
     "seasonalityInfoTitle": "4. Seasonality Information",
     "seasonalityInfoText": "Sales and operational metrics can vary significantly throughout the year due to seasonal factors such as holidays, promotional periods, and specific market demands. It is crucial to consider these variations when analyzing performance and setting expectations. For example, end-of-year periods typically show higher sales volumes, while certain months might experience natural dips. Always compare current performance against historical data from similar periods to get a more accurate interpretation."
+  },
+  "contextBar": {
+    "currentWeek": "Current Week",
+    "week": "Week",
+    "weight": "Weight",
+    "appliedFilters": "Applied Filters",
+    "noFiltersApplied": "No filters applied"
   }
 }

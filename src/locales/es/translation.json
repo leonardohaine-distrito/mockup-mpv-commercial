@@ -13,11 +13,13 @@
     "south": "Sur",
     "east": "Este",
     "west": "Oeste",
+    "allRegionals": "Todas las Regionales",
     "clientLabel": "Cliente:",
     "selectClientPlaceholder": "Seleccionar Cliente",
     "magazineLuiza": "Magazine Luiza",
     "casasBahia": "Casas Bahia",
     "gazin": "Gazin",
+    "allClients": "Todos los Clientes",
     "categoryLabel": "Categoría:",
     "selectCategoryPlaceholder": "Seleccionar Categoría",
     "allCategories": "Todas las Categorías",
@@ -85,7 +87,7 @@
     "pendingFobItemsByCategory": "Ítems FOB Pendientes por Categoría",
     "totalItems": "Total: {{count}} ítems",
     "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems FOB pendientes, considerando todas las categorías. Utilice los datos completos disponibles de la fuente e incluya modelo, PNC, categoría, cantidad pendiente y voltaje.",
-    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interativo a través del Chat basado en los datos disponibles."
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
   },
   "creditBlockTable": {
     "title": "Bloqueo de Crédito",
@@ -99,7 +101,7 @@
     "blockedItemsByCategory": "Ítems Bloqueados por Órdenes por Categoría",
     "totalItems": "Total: {{count}} ítems",
     "chatSuggestionText": "Generar una tabla con los 5 productos principales con mayor número de ítems bloqueados por orden. Utilice los datos completos disponibles de la fuente y presente los resultados en orden descendente de bloqueo. Incluya modelo, PNC, cantidad pendiente y categoría.",
-    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactiva a través del Chat basado en los datos disponibles."
+    "chatSuggestionTooltip": "Haga clic para iniciar un análisis interactivo a través del Chat basado en los datos disponibles."
   },
   "sellInOut": {
     "title": "Sell-In y Sell-Out",
@@ -187,5 +189,12 @@
     "interpretationExample2": "Un KPI de 'Bloqueo de Crédito' en rojo significa que más del 5% de los pedidos están bloqueados por crédito, lo que indica una necesidad urgente de acción para liberar estas órdenes.",
     "seasonalityInfoTitle": "4. Información sobre Estacionalidad",
     "seasonalityInfoText": "Las métricas de ventas y operativas pueden variar significativamente a lo largo del año debido a factores estacionales como días festivos, períodos promocionales y demandas específicas del mercado. Es crucial considerar estas variaciones al analizar el rendimiento y establecer expectativas. Por ejemplo, los períodos de fin de año suelen mostrar volúmenes de ventas más altos, mientras que ciertos meses pueden experimentar caídas naturales. Siempre compare el rendimiento actual con datos históricos de períodos similares para obtener una interpretación más precisa."
+  },
+  "contextBar": {
+    "currentWeek": "Semana Actual",
+    "week": "Semana",
+    "weight": "Peso",
+    "appliedFilters": "Filtros aplicados",
+    "noFiltersApplied": "Ningún filtro aplicado"
   }
 }

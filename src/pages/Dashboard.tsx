@@ -14,6 +14,7 @@ import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
+import { ContextBar } from "@/components/ContextBar"; // New import
 import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
 
 // Helper type for DetailedKpisTable
@@ -73,7 +74,9 @@ const Dashboard: React.FC = () => {
   const [showActivateButton, setShowActivateButton] = useState(false);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [suggestedChatInput, setSuggestedChatInput] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all"); // New state for category filter
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedRegional, setSelectedRegional] = useState<string>("all"); // New state
+  const [selectedClient, setSelectedClient] = useState<string>("all");     // New state
 
   const handleOpenAssistantPrompt = () => {
     setShowActivateButton(true);
@@ -160,7 +163,19 @@ const Dashboard: React.FC = () => {
             <ActivateChatButton onActivate={handleActivateChat} />
           </div>
         )}
-        <Filters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
+        <Filters
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          selectedRegional={selectedRegional} // Pass new props
+          onRegionalChange={setSelectedRegional} // Pass new props
+          selectedClient={selectedClient}     // Pass new props
+          onClientChange={setSelectedClient}     // Pass new props
+        />
+        <ContextBar // New component
+          selectedRegional={selectedRegional}
+          selectedClient={selectedClient}
+          selectedCategory={selectedCategory}
+        />
         <ExecutiveSummary
           filteredAgendaData={filteredAgendaData}
           filteredFobData={filteredFobData}
