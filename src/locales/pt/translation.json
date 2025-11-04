@@ -187,15 +187,5 @@
     "interpretationExample2": "Um KPI de 'Bloqueio de Crédito' vermelho significa que mais de 5% dos pedidos estão bloqueados por crédito, sinalizando uma necessidade urgente de ação para liberar essas ordens.",
     "seasonalityInfoTitle": "4. Informações sobre Sazonalidade",
     "seasonalityInfoText": "As métricas de vendas e operacionais podem variar significativamente ao longo do ano devido a fatores sazonais, como feriados, períodos promocionais e demandas específicas do mercado. É crucial considerar essas variações ao analisar o desempenho e definir expectativas. Por exemplo, períodos de fim de ano geralmente apresentam volumes de vendas mais altos, enquanto certos meses podem ter quedas naturais. Sempre compare o desempenho atual com dados históricos de períodos semelhantes para obter uma interpretação mais precisa."
-  },
-  "contextBar": {
-    "currentWeek": "Semana Atual",
-    "week": "Semana",
-    "weight": "Peso",
-    "appliedFilters": "Filtros aplicados",
-    "regional": "Regional",
-    "client": "Cliente",
-    "category": "Categoria",
-    "all": "Todos"
   }
 }

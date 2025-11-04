@@ -8,13 +8,12 @@ import { DetailedKpisTable } from "@/components/DetailedKpisTable";
 import { AgendaFobStatus } from "@/components/AgendaFobStatus";
 import { FobStatusTable } from "@/components/FobStatusTable";
 import { CreditBlockTable } from "@/components/CreditBlockTable";
-import { OrderBlockTable } = "@/components/OrderBlockTable";
+import { OrderBlockTable } from "@/components/OrderBlockTable";
 import { SellInOut } from "@/components/SellInOut";
 import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
-import { ContextBar } from "@/components/ContextBar"; // Import ContextBar
 import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
 
 // Helper type for DetailedKpisTable
@@ -74,9 +73,7 @@ const Dashboard: React.FC = () => {
   const [showActivateButton, setShowActivateButton] = useState(false);
   const [showChatAssistant, setShowChatAssistant] = useState(false);
   const [suggestedChatInput, setSuggestedChatInput] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all"); // State for category filter
-  const [selectedRegional, setSelectedRegional] = useState<string>("all"); // New state for regional filter
-  const [selectedClient, setSelectedClient] = useState<string>("all"); // New state for client filter
+  const [selectedCategory, setSelectedCategory] = useState<string>("all"); // New state for category filter
 
   const handleOpenAssistantPrompt = () => {
     setShowActivateButton(true);
@@ -163,19 +160,7 @@ const Dashboard: React.FC = () => {
             <ActivateChatButton onActivate={handleActivateChat} />
           </div>
         )}
-        <Filters
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          selectedRegional={selectedRegional} // Pass new state
-          onRegionalChange={setSelectedRegional} // Pass new setter
-          selectedClient={selectedClient} // Pass new state
-          onClientChange={setSelectedClient} // Pass new setter
-        />
-        <ContextBar
-          selectedRegional={selectedRegional}
-          selectedClient={selectedClient}
-          selectedCategory={selectedCategory}
-        />
+        <Filters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
         <ExecutiveSummary
           filteredAgendaData={filteredAgendaData}
           filteredFobData={filteredFobData}
