@@ -14,6 +14,7 @@ import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ActivateChatButton } from "@/components/ActivateChatButton";
+import { KpiLegend } from "@/components/KpiLegend"; // Import KpiLegend
 import { rawAgendaData, rawFobData, rawCreditBlockData, rawOrderBlockData, rawSellInData, rawSellOutData, DashboardDataItem, SellInOutDataItem } from "@/data/dashboardData";
 
 // Helper type for DetailedKpisTable
@@ -169,6 +170,7 @@ const Dashboard: React.FC = () => {
           filteredSellInData={filteredSellInData}
           filteredSellOutData={filteredSellOutData}
         />
+        <KpiLegend /> {/* Add the KpiLegend component here */}
         <DetailedKpisTable
           onSuggestChatInput={handleSuggestChatInput}
           kpiData={filteredDetailedKpisData} // Pass filtered data

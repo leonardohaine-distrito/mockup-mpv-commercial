@@ -140,4 +140,24 @@
     "returnHome": "Return to Home"
   },
   "madeWithDyad": "Made with Dyad"
+  },
+  "kpiLegend": {
+    "title": "KPI Color Rules Legend",
+    "colorRulesTitle": "Rules for KPI Color Coding",
+    "kpiColumn": "KPI",
+    "greenColumn": "Green (✓)",
+    "yellowColumn": "Yellow (!)",
+    "redColumn": "Red (✗)",
+    "fatQuota": "% Billed x Quota",
+    "fatAllocatedQuota": "% Billed + Allocated x Quota",
+    "projectedResolvedQuota": "% Projected Resolved x Quota",
+    "totalSalesAdherentQuota": "% Total Adherent Sales x Quota",
+    "totalMonthSalesQuotaM0": "% Total Month Sales x Quota M0",
+    "greenRuleWeeklyWeight": "≥ Weekly Weight",
+    "yellowRuleWeeklyWeight": "80–99% of Weight",
+    "redRuleWeeklyWeight": "< 80% of Weight",
+    "greenRuleAccumulated": "≥ Expected Accumulated",
+    "yellowRuleAccumulated": "80–99% of Accumulated",
+    "redRuleAccumulated": "< 80% of Accumulated"
+  }
 }
