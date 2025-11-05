@@ -10,7 +10,7 @@ import { FobStatusTable } from "@/components/FobStatusTable";
 import { CreditBlockTable } from "@/components/CreditBlockTable";
 import { OrderBlockTable } from "@/components/OrderBlockTable";
 import { SellInOut } from "@/components/SellInOut";
-import { Recommendations } from "@/components/Recommendations";
+import { Recommendations } => "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ContextBar } from "@/components/ContextBar";
@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
       <div className="space-y-8">
         {/* Chat Assistant Modal */}
         <Dialog open={isChatModalOpen} onOpenChange={setIsChatModalOpen}>
-          <DialogContent className="sm:max-w-[600px] p-0 [&>button]:hidden"> {/* Added [&>button]:hidden to hide default close button */}
+          <DialogContent className="sm:max-w-3xl p-0 [&>button]:hidden"> {/* Increased max-width to sm:max-w-3xl */}
             {/* ChatAssistant already has its own Card structure, so we just render it */}
             <ChatAssistant
               onClose={handleCloseChatModal}
