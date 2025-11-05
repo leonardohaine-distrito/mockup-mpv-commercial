@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
       <div className="space-y-8">
         {/* Chat Assistant Modal */}
         <Dialog open={isChatModalOpen} onOpenChange={setIsChatModalOpen}>
-          <DialogContent className="sm:max-w-[600px] p-0"> {/* Adjusted max-width and padding */}
+          <DialogContent className="sm:max-w-[600px] p-0 [&>button]:hidden"> {/* Added [&>button]:hidden to hide default close button */}
             {/* ChatAssistant already has its own Card structure, so we just render it */}
             <ChatAssistant
               onClose={handleCloseChatModal}
