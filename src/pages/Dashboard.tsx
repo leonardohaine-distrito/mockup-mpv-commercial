@@ -10,7 +10,7 @@ import { FobStatusTable } from "@/components/FobStatusTable";
 import { CreditBlockTable } from "@/components/CreditBlockTable";
 import { OrderBlockTable } from "@/components/OrderBlockTable";
 import { SellInOut } from "@/components/SellInOut";
-import { Recommendations } => "@/components/Recommendations";
+import { Recommendations } from "@/components/Recommendations";
 import { ChatWidget } from "@/components/ChatWidget";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { ContextBar } from "@/components/ContextBar";
